@@ -3,10 +3,10 @@ GO
 USE livraria
 
 CREATE TABLE livro(
-codigo	  INT             NOT NULL  IDENTITY(100001, 100),
-nome	  VARCHAR(200)    NOT NULL,
-lingua    VARCHAR(10)     NOT NULL  DEFAULT('PT-BR'),
-ano       INT             NOT NULL  CHECK(ano <= '1989-12-31')
+codigo	  INT              NOT NULL  IDENTITY(100001, 100),
+nome	    VARCHAR(200)     NOT NULL,
+lingua    VARCHAR(10)      NOT NULL  DEFAULT('PT-BR'),
+ano       INT              NOT NULL  CHECK(ano >= 1990)
 PRIMARY KEY(codigo)
 )
 GO
@@ -32,7 +32,7 @@ ID_editora       INT            NOT NULL   IDENTITY(491, 16),
 nome             VARCHAR(70)    NOT NULL   UNIQUE,
 telefone         VARCHAR(11)    NOT NULL   CHECK(LEN(telefone) = 10),
 logradouro       VARCHAR(200)   NOT NULL,
-numero           INT            NOT NULL   CHECK(numero <= 0),
+numero           INT            NOT NULL   CHECK(numero > 0),
 CEP              CHAR(8)        NOT NULL   CHECK(LEN(CEP) = 8),
 complemento      VARCHAR(255)   NOT NULL
 PRIMARY KEY(ID_editora)
@@ -40,9 +40,9 @@ PRIMARY KEY(ID_editora)
 GO
 CREATE TABLE edicao(
 isbn            CHAR(13)       NOT NULL  CHECK(LEN(isbn) = 13) ,
-preco           DECIMAL(4,2)   NOT NULL  CHECK(preco <= 0.0),
-ano             INT            NOT NULL  CHECK(ano <= '1992-12-31'),
-numero_paginas  INT            NOT NULL  CHECK(numero_paginas < 15),
+preco           DECIMAL(4,2)   NOT NULL  CHECK(preco >= 0.0),
+ano             INT            NOT NULL  CHECK(ano >= 1993),
+numero_paginas  INT            NOT NULL  CHECK(numero_paginas > 15),
 qtd_estoque     INT            NOT NULL
 PRIMARY KEY(isbn)
 )
